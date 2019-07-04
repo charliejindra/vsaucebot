@@ -158,7 +158,7 @@ while i < 1:
         sayingUse = sayingUse.replace('#', useTrend)
         sayingUse = sayingUse.replace('^', "don't")
         sayingUse = sayingUse.replace('~', "")
-        sayingUse = sayingUse.replace('$', "do")
+        sayingUse = sayingUse.replace('$', "they")
     else:
         sayingUse = sayingUse.replace('@', "is")      #set of things to replace if the word is singular
         sayingUse = sayingUse.replace('[', "a")
@@ -167,7 +167,7 @@ while i < 1:
         sayingUse = sayingUse.replace('#', useTrendPlural)
         sayingUse = sayingUse.replace('^', "doesn't")
         sayingUse = sayingUse.replace('~', "s")
-        sayingUse = sayingUse.replace('$', "does")
+        sayingUse = sayingUse.replace('$', "it")
     #print(sayingUse)
     fp.close()
 
