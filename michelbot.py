@@ -33,10 +33,10 @@ def spaceOut(oldString): # takes string as input, returns string with spaces ins
     return newString
 
 #twitter API credentials
-consumer_key = ''
-consumer_secret = ''
-access_token = ''
-access_secret = ''
+consumer_key = 'F7ec6OnbR2I5XI5YG6lTXnjxy'
+consumer_secret = 'Wh6cvc8hGiTF2OKfxssnvEB7I6MEAztESxHOsDduCk2X1HUyPQ'
+access_token = '1097205014764941318-5f5paNLOivqzuCxBlxxKjfHmAcFo5o'
+access_secret = 'QHbnvqWVhJnpCTpiVdFpwWg0PCq8azZUq5uQ3GP2TVBhX'
 
 #login to twitter account as:
 auth = tp.OAuthHandler(consumer_key, consumer_secret)
@@ -68,7 +68,7 @@ runNo.close()
 
 # bitstring to keep track of which sayings have been used
 wasUsedList = []
-michelSayings = open("michelSayings.txt", 'r', encoding="utf8")
+michelSayings = open("michelSayings.txt", 'r')
 for cnt, line in enumerate(michelSayings):     # make the bitstring the length of michel sayings, each bit corresponds to a line in michelSayings.txt
     wasUsedList.append(False) # false means it hasn't been used yet
 print("length of michelSayings bitstring: " + str(len(wasUsedList))) # print length of michel bit
@@ -112,7 +112,7 @@ while i < 1:
     if useTrend.endswith('s') :
         isPlural = True
 
-    fp = open("michelSayings.txt", 'r', encoding="utf8") # open michelSayings.txt in plaintext
+    fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
 
     while True:              # basically a do while loop
         lineNo = random.randint(0, 97) # pick random line number from michelSayings
