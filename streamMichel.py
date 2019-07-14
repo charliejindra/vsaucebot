@@ -7,97 +7,8 @@ import datetime          # datetime class
 import random            # rng
 import pytz              # python timezones
 import smtplib, ssl
-
-#function for sending email
-def send_email(subject, msg):
-    try:
-        server = smtplib.SMTP('smtp.gmail.com:587')
-        server.ehlo()
-        server.starttls()
-
-        passW = open("dietMtnDew.txt", 'r')
-        #print("opened password file")
-        michelPass = passW.readline()
-        #print("read password")
-        passW.close()
-        #print("closed password file")
-
-        server.login("michelvsace@gmail.com", michelPass)
-
-        print("got thru the email opening")
-
-        try:
-            print('message abttta be stored')
-            message = 'Subject: {}\n\n{}'.format(subject, msg)
-            print('message stored man')
-            server.sendmail("michelvsace@gmail.com", "charlessjindra@gmail.com", message)
-        except:
-            print('didnt work :(')
-            message = 'Subject: {}\n\n{}'.format(subject, "Copying tweet failed.")
-            server.sendmail("michelvsace@gmail.com", "charlessjindra@gmail.com", message)
-        server.quit()
-        print("Success: Email sent!")
-    except:
-        print("Email failed to send.")
-
-#function to make message out of thing
-def makeStatus(term):
-    isPlural = False
-    if term.endswith('s') :
-        isPlural = True
-
-    fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
-
-    lineNo = random.randint(0, 90) # pick random line number from michelSayings
-    print("Line from michelSayings: " + str(lineNo))
-
-    j = 0
-    while j != lineNo:
-        line = fp.readline()
-        j = j + 1
-    #print("got through for")
-    sayingUse = fp.readline() # set sayingUse to that line
-    sayingUse = sayingUse.decode('utf-8')
-    try:
-        exeLog.write("Term: " + term+ "\n")
-    except:
-        exeLog.write("###ERROR: trend not able to be recorded for unknown reason\n")
-
-    sayingUse = sayingUse.replace('+', term)
-    sayingUse = sayingUse.replace('$', term + "'s")
-    termPlural = term + "s"
-    #print(useTrendPlural)
-    if isPlural:
-        #print("it's plural!")
-        sayingUse = sayingUse.replace('@', "are")     #set of things to replace if the word is plural
-        sayingUse = sayingUse.replace('[', "")
-        sayingUse = sayingUse.replace(']', "have")
-        sayingUse = sayingUse.replace('=', "do")
-        sayingUse = sayingUse.replace('#', term)
-        sayingUse = sayingUse.replace('^', "don't")
-        sayingUse = sayingUse.replace('~', "")
-    else:
-        sayingUse = sayingUse.replace('@', "is")      #set of things to replace if the word is singular
-        sayingUse = sayingUse.replace('[', "a")
-        sayingUse = sayingUse.replace(']', "has")
-        sayingUse = sayingUse.replace('=', "does")
-        sayingUse = sayingUse.replace('#', termPlural)
-        sayingUse = sayingUse.replace('^', "doesn't")
-        sayingUse = sayingUse.replace('~', "s")
-    #print(sayingUse)
-    fp.close()
-
-    #print('got here')
-    message = sayingUse
-
-    #print(message)
-    try:
-        exeLog.write(message + "\n")
-    except:
-        exeLog.write("###ERROR: message not able to be recorded for unknown reason\n")
-    return message
-    #print("updated status")
-    #exeLog.write("updated status"  + "\n\n")
+from METHODS_Stream import *
+import APIKeys
 
 #function to reply or like a tweet given to it
 def reactToTweet(status):
@@ -106,7 +17,7 @@ def reactToTweet(status):
             print("+--------------------------+")
             print(status.text)
             print("+--------------------------+")
-            randoReply = random.randint(0, 99)                # random chance to reply to a rando.
+            randoReply = random.randint(0, 100)                # random chance to reply to a rando.
             if (status.user.screen_name == "tweetsauce") or (randoReply < 6): # reply to vsauce acct branch, TESTACC79527338 for tests
                 if (status.text[0] == 'R' and status.text[1] == 'T'):  # if its a RT
                     print("3. Ended because retweeted status\n\n")
@@ -144,7 +55,7 @@ def reactToTweet(status):
                         wordChoice = wordChoice + " " + listOfWords[wordIndex+1]
                     print("Word Chosen: " + wordChoice)
                     exeLog.write("Word Chosen: " + wordChoice)
-                    tweetBuilder = makeStatus(wordChoice)
+                    tweetBuilder = makeStatus(wordChoice, Log)
                     #print("got past make status")
                     api.update_status("@"+ status.user.screen_name+" " + tweetBuilder, status.id) #run the big ol function at the top # reply to vsauce acct branch, TESTACC79527338 for tests
                     print("replied successfully!")
@@ -157,7 +68,7 @@ def reactToTweet(status):
                     msg = status.user.screen_name+" tweeted:\n"+status.text+"\n\nI tweeted:\n@tweetsauce "+tweetBuilder+"\n\nLink to tweet: https://twitter.com/TESTACC79527338/status/" +status.id_str  #obv TESTACC79527338 for test, tweetsauce for actual
                     #msg = status.user.screen_name+" tweeted:\n\n"+status.text+"\n\nI would've tweeted:\n\n@tweetsauce "+tweetBuilder
 
-                    send_email(subject, msg)
+                    send_email(subject, msg, exeLog)
 
 
             else:                                             # favorite tweet that mentioned vsauce branch
@@ -172,7 +83,7 @@ def reactToTweet(status):
                     subject = "I liked a tweet!"
                     msg = status.user.screen_name+" tweeted:\n\n"+status.text
 
-                    send_email(subject, msg)
+                    send_email(subject, msg, Log)
 
 
 
@@ -183,10 +94,10 @@ def reactToTweet(status):
         print("Didn't work somewhere along the way, went to except\n")
 
 #twitter API credentials
-consumer_key = ''
-consumer_secret = ''
-access_token = ''
-access_secret = ''
+consumer_key = APIKeys.ckey
+consumer_secret = APIKeys.csecret
+access_token = APIKeys.atoken
+access_secret = APIKeys.asecret
 
 #login to twitter account as:
 auth = tp.OAuthHandler(consumer_key, consumer_secret)

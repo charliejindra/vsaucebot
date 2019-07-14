@@ -5,7 +5,7 @@ import datetime          # datetime class
 import random            # rng
 import pytz              # python timezones
 import constants         # michelbot specific constants
-from grammarFunctions import spaceOut, getSpaceData
+from METHODS_Grammar import spaceOut, getSpaceData
 import APIKeys
 
 #NOTE : as of now streaming stuff doesn't work with this file, although the skeleton is still here. It is functioning on streamMichel.py
@@ -25,7 +25,6 @@ auth.set_access_token(access_token, access_secret)
 api = tp.API(auth)
 print('running!')
 #actual twitter stuff yay
-i = 0; # just here to create infinite loop
 
 #creating stream for replies and likes
 #overriding mystreamlistener to add logic to on_status
@@ -60,7 +59,7 @@ trueAmount = 0 # the amount of "True"s in the bitstring. I increment it along th
 exeLog = open("logs/log"+str(currentNo)+".txt", 'w+') # create new log for this edition yaye, w+ makes new file
 print("Started Log #"  + str(currentNo))
 
-while i < 1:
+while True: # infinite loop
     print('-----------------')
     now = datetime.datetime.now(pytz.timezone('America/New_York')) # sets the timezone to new york so its not britain yay
     exeLog.write("Started Log #"  + str(currentNo))
@@ -77,9 +76,9 @@ while i < 1:
     # put all the names together with a ' ' separating them
     trendsName = ' '.join(names)
 
-    trendNo = random.randint(1, 48) #random trend from 1st to 50th
+    trendNo = random.randint(1, 51) #random trend from 1st to 50th
     while ("Thoughts" in trends[trendNo]["name"]): # if its some dumbass shit like sunday thoughts then we're not using it
-         trendNo = random.randint(1, 48) #random trend from 1st to 50th
+         trendNo = random.randint(1, 51) #random trend from 1st to 50th
     exeLog.write(str(trendNo) + "\n")
 
     useTrend = trends[trendNo]["name"]     #trend to use
@@ -96,7 +95,7 @@ while i < 1:
     fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
 
     while True:              # basically a do while loop
-        lineNo = random.randint(0, 97) # pick random line number from michelSayings
+        lineNo = random.randint(0, 98) # pick random line number from michelSayings
         print("the number was " + str(lineNo))
         if not(wasUsedList[lineNo]):# as long as the line number has not been used, then break, otherwise loop again
             wasUsedList[lineNo] = True  # now set it to true
