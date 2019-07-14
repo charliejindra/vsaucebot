@@ -4,39 +4,20 @@ import time
 import datetime          # datetime class
 import random            # rng
 import pytz              # python timezones
+import constants         # michelbot specific constants
+from grammarFunctions import spaceOut, getSpaceData
+import APIKeys
 
 #NOTE : as of now streaming stuff doesn't work with this file, although the skeleton is still here. It is functioning on streamMichel.py
 
 
 #myStream.filter(track=['vsauce', 'vsauce bot', '@vsaucebot', 'Michael Stevens'], async=True)
 
-#spaceOut function
-def spaceOut(oldString): # takes string as input, returns string with spaces inserted at every capital letter
-    pos = 0
-    newString = ''
-    while pos < len(oldString):
-        newString = newString + oldString[pos]  # add letter from old to new
-
-        try:
-            if ((oldString[pos + 1].isupper()) and (pos != 0) and (oldString[pos] != ' ') and ((not oldString[pos+2].isupper()) or oldString[pos].islower())) and (not(oldString[pos-1].isupper() and oldString[pos].isupper() and oldString[pos+1].isupper())) or (oldString[pos-1].isupper() and oldString[pos].isupper() and oldString[pos+1].islower()) or (oldString[pos+1].isupper() and oldString[pos+2:].islower()):
-                # if the next letter is capital
-                # and not at the 0th position (so we dont have a space at the beginning)
-                # and we're not at a space (so we dont have double spaces)
-                # and 2 characters from now we dont have an uppercase (to check if we're in the middle of an acronym or something thats all caps)
-                # OR (in a new branch) if this character and the last one were capital, and the next one is lowercase (end of an acronym)
-                # OR (in a new branch) if this character is capital but every character after isnt
-                newString = newString + ' '    # add space to new string
-        except:   # when it gets to end of string it goes here, this is probably sloppy as hell
-            time.sleep(0)
-
-        pos = pos + 1
-    return newString
-
 #twitter API credentials
-consumer_key = 'F7ec6OnbR2I5XI5YG6lTXnjxy'
-consumer_secret = 'Wh6cvc8hGiTF2OKfxssnvEB7I6MEAztESxHOsDduCk2X1HUyPQ'
-access_token = '1097205014764941318-5f5paNLOivqzuCxBlxxKjfHmAcFo5o'
-access_secret = 'QHbnvqWVhJnpCTpiVdFpwWg0PCq8azZUq5uQ3GP2TVBhX'
+consumer_key = APIKeys.ckey
+consumer_secret = APIKeys.csecret
+access_token = APIKeys.atoken
+access_secret = APIKeys.asecret
 
 #login to twitter account as:
 auth = tp.OAuthHandler(consumer_key, consumer_secret)
