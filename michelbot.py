@@ -125,6 +125,8 @@ while True: # infinite loop
     except:
         exeLog.write("###ERROR: trend not able to be recorded for unknown reason\n")
 
+    sayingUse = sayingUse.decode('utf-8')
+
     sayingUse = sayingUse.replace('+', useTrend)
     sayingUse = sayingUse.replace('$', useTrend + "'s")
     useTrendPlural = useTrend + "s"
