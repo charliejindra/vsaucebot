@@ -48,9 +48,15 @@ runNo.close()
 
 # bitstring to keep track of which sayings have been used
 wasUsedList = []
-michelSayings = open("michelSayings.txt", 'r')
-for cnt, line in enumerate(michelSayings):     # make the bitstring the length of michel sayings, each bit corresponds to a line in michelSayings.txt
-    wasUsedList.append(False) # false means it hasn't been used yet
+#michelSayings = open("michelSayings.txt", 'r')
+# for line in michelSayings:     # make the bitstring the length of michel sayings, each bit corresponds to a line in michelSayings.txt
+#     wasUsedList.append(False) # false means it hasn't been used yet
+#     michelSayings.readline() 
+
+with open('michelSayings.txt', 'r', encoding="utf8") as michelSayings:
+    for line in michelSayings:
+        wasUsedList.append(False)
+
 print("length of michelSayings bitstring: " + str(len(wasUsedList))) # print length of michel bit
 michelSayings.close()
 trueAmount = 0 # the amount of "True"s in the bitstring. I increment it along the way, this way we don't have to check the whole bs every time
@@ -86,13 +92,14 @@ while True: # infinite loop
     if (useTrend[0] == '#'):
         wasHashtag = True
     useTrend = useTrend.strip("#")
-    if (not useTrend.isupper()) : # if its all caps or wasnt a hashtag just keep it, don't space out  //and (not wasHashtag)
+    if (wasHashtag) : # if its all caps or wasnt a hashtag just keep it, don't space out  //and (not wasHashtag)
+        useTrend = useTrend + ' '
         useTrend = spaceOut(oldString = useTrend)
     isPlural = False
     if useTrend.endswith('s') :
         isPlural = True
 
-    fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
+    fp = open("michelSayings.txt", 'r', encoding="utf8") # open michelSayings.txt in plaintext
 
     while True:              # basically a do while loop
         lineNo = random.randint(0, 98) # pick random line number from michelSayings
@@ -125,7 +132,11 @@ while True: # infinite loop
     except:
         exeLog.write("###ERROR: trend not able to be recorded for unknown reason\n")
 
-    sayingUse = sayingUse.decode('utf-8')
+    try:
+        sayingUse = sayingUse.decode('utf-8')
+    except:
+        time.sleep(0)
+    
 
     sayingUse = sayingUse.replace('+', useTrend)
     sayingUse = sayingUse.replace('$', useTrend + "'s")
