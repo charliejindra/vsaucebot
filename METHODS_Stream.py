@@ -1,4 +1,6 @@
 import random
+import smtplib
+import time
 
 #function for sending email
 def send_email(subject, msg, Log):
@@ -33,12 +35,14 @@ def send_email(subject, msg, Log):
         print("Email failed to send.")
 
 #function to make message out of thing
-def makeStatus(term, Log):
+def makeStatus(term):
     isPlural = False
     if term.endswith('s') :
         isPlural = True
-
-    fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
+    try:
+        fp = open("michelSayings.txt", 'r', encoding='utf-8') # open michelSayings.txt in plaintext
+    except:
+        fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
 
     lineNo = random.randint(0, 90) # pick random line number from michelSayings
     print("Line from michelSayings: " + str(lineNo))
@@ -49,11 +53,14 @@ def makeStatus(term, Log):
         j = j + 1
     #print("got through for")
     sayingUse = fp.readline() # set sayingUse to that line
-    sayingUse = sayingUse.decode('utf-8')
     try:
-        Log.write("Term: " + term+ "\n")
+        sayingUse = sayingUse.decode('utf-8')
     except:
-        Log.write("###ERROR: trend not able to be recorded for unknown reason\n")
+        time.sleep(0)
+    # try:
+    #     Log.write("Term: " + term+ "\n")
+    # except:
+    #     Log.write("###ERROR: trend not able to be recorded for unknown reason\n")
 
     sayingUse = sayingUse.replace('+', term)
     sayingUse = sayingUse.replace('$', term + "'s")
@@ -83,10 +90,10 @@ def makeStatus(term, Log):
     message = sayingUse
 
     #print(message)
-    try:
-        Log.write(message + "\n")
-    except:
-        Log.write("###ERROR: message not able to be recorded for unknown reason\n")
+    # try:
+    #     Log.write(message + "\n")
+    # except:
+    #     Log.write("###ERROR: message not able to be recorded for unknown reason\n")
     return message
     #print("updated status")
     #exeLog.write("updated status"  + "\n\n")

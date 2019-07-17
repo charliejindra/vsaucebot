@@ -2,6 +2,7 @@
 # last edit 6/7/2019
 # Charlie Jindra
 import tweepy as tp      # twitter api
+from twitter import *
 import time
 import datetime          # datetime class
 import random            # rng
@@ -17,13 +18,17 @@ def reactToTweet(status):
             print("+--------------------------+")
             print(status.text)
             print("+--------------------------+")
+            encodedString = status.text
+            try:
+                encodedString.decode('utf8') #encode that shit if it needs it
+            except:
+                time.sleep(0)
             randoReply = random.randint(0, 100)                # random chance to reply to a rando.
             if (status.user.screen_name == "tweetsauce") or (randoReply < 6): # reply to vsauce acct branch, TESTACC79527338 for tests
                 if (status.text[0] == 'R' and status.text[1] == 'T'):  # if its a RT
                     print("3. Ended because retweeted status\n\n")
                 else:
                     print("1. Replying to a tweet!")
-                    encodedString = status.text.decode('utf-8') #encode that shit
                     listOfWords = encodedString.split(' ')
                     wordChoice = ""
                     topWordScore = 0
@@ -55,7 +60,7 @@ def reactToTweet(status):
                         wordChoice = wordChoice + " " + listOfWords[wordIndex+1]
                     print("Word Chosen: " + wordChoice)
                     exeLog.write("Word Chosen: " + wordChoice)
-                    tweetBuilder = makeStatus(wordChoice, Log)
+                    tweetBuilder = makeStatus(wordChoice)
                     #print("got past make status")
                     api.update_status("@"+ status.user.screen_name+" " + tweetBuilder, status.id) #run the big ol function at the top # reply to vsauce acct branch, TESTACC79527338 for tests
                     print("replied successfully!")
@@ -83,7 +88,7 @@ def reactToTweet(status):
                     subject = "I liked a tweet!"
                     msg = status.user.screen_name+" tweeted:\n\n"+status.text
 
-                    send_email(subject, msg, Log)
+                    send_email(subject, msg, exeLog)
 
 
 
@@ -128,11 +133,11 @@ class MyStreamListener(tp.StreamListener):
         print('timed out')
         exeLog.write("###########################TIMEOUT##############################")
 
-    def on_exception(self, exception):
-        print(exception)
-        exeLog.write("###########################exception##############################")
-        exeLog.write("ran into exception") # right now switched from writing exception bc didnt work
-        return
+    # def on_exception(self, exception):
+    #     print(exception)
+    #     exeLog.write("###########################exception##############################")
+    #     exeLog.write("ran into exception") # right now switched from writing exception bc didnt work
+    #     return
 
 #actually making stream
 myStreamListener = MyStreamListener()
@@ -143,4 +148,4 @@ myStream = tp.Stream(auth = api.auth, listener=myStreamListener)
 #    reactToTweet(tweet)
 
 #stream filter (thing that keeps runnin forever)
-myStream.filter(follow=["395477244"], track=['vsauce', '@vsaucebot', 'Michael Stevens']) #1114526834962632705 testacct 395477244 tweetsauce
+myStream.filter(follow=["395477244"], track=['@vsaucebot', 'vsauce', 'michael stevens']) #1114526834962632705 testacct 395477244 tweetsauce
