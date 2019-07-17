@@ -2,7 +2,6 @@
 # last edit 6/7/2019
 # Charlie Jindra
 import tweepy as tp      # twitter api
-from twitter import *
 import time
 import datetime          # datetime class
 import random            # rng
