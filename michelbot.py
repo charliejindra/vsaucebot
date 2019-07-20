@@ -53,9 +53,14 @@ wasUsedList = []
 #     wasUsedList.append(False) # false means it hasn't been used yet
 #     michelSayings.readline() 
 
-with open('michelSayings.txt', 'r', encoding="utf8") as michelSayings:
-    for line in michelSayings:
-        wasUsedList.append(False)
+try:
+    with open('michelSayings.txt', 'r', encoding="utf8") as michelSayings:
+        for line in michelSayings:
+            wasUsedList.append(False)
+except:
+    with open('michelSayings.txt', 'r') as michelSayings:
+        for line in michelSayings:
+            wasUsedList.append(False)
 
 print("length of michelSayings bitstring: " + str(len(wasUsedList))) # print length of michel bit
 michelSayings.close()
@@ -99,7 +104,10 @@ while True: # infinite loop
     if useTrend.endswith('s') :
         isPlural = True
 
-    fp = open("michelSayings.txt", 'r', encoding="utf8") # open michelSayings.txt in plaintext
+    try:
+        fp = open("michelSayings.txt", 'r', encoding="utf8") # open michelSayings.txt in plaintext
+    except:
+        fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
 
     while True:              # basically a do while loop
         lineNo = random.randint(0, 98) # pick random line number from michelSayings
