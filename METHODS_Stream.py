@@ -97,3 +97,31 @@ def makeStatus(term):
     return message
     #print("updated status")
     #exeLog.write("updated status"  + "\n\n")
+
+def prettifyTime(secs):
+    secs = round(secs)
+    mins = 0
+    hrs = 0
+    dys = 0
+    mos = 0
+    if (secs >= 60):
+        mins = int(secs / 60)
+        secs = secs % 60
+        if (mins >= 60):
+            hrs = int(mins / 60)
+            mins = mins % 60
+            if (hrs >= 24):
+                dys = int(hrs / 24)
+                hrs = hrs % 24
+                if (dys >= 30):
+                    mos = int(dys / 30)
+                    dys = dys % 30
+                    return "{} months, {} days, {} hours, {} minutes and {} seconds".format(mos, dys, hrs, mins, secs)
+                else:
+                    return "{} days, {} hours, {} minutes and {} seconds".format(dys, hrs, mins, secs)
+            else:
+                return "{} hours, {} minutes and {} seconds".format(hrs, mins, secs)
+        else:
+            return "{} minutes and {} seconds".format(mins, secs)
+    else:
+        return "{} seconds".format(secs)
