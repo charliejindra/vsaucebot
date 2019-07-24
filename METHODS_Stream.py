@@ -1,6 +1,20 @@
 import random
 import smtplib
 import time
+import tweepy as tp
+import APIKeys
+
+#twitter API credentials
+consumer_key = APIKeys.ckey
+consumer_secret = APIKeys.csecret
+access_token = APIKeys.atoken
+access_secret = APIKeys.asecret
+
+#login to twitter account as:
+auth = tp.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_secret)
+api = tp.API(auth)
+#actual twitter stuff yay
 
 #function for sending email
 def send_email(subject, msg, Log):
@@ -125,3 +139,12 @@ def prettifyTime(secs):
             return "{} minutes and {} seconds".format(mins, secs)
     else:
         return "{} seconds".format(secs)
+
+def replyToStatus(status, tweetBuilder):
+    screen_name = status["user"]["screen_name"]
+    content = status["text"]
+    api.update_status("@"+ screen_name +" " + tweetBuilder, status["id"]) #run the big ol function at the top # reply to vsauce acct branch, TESTACC79527338 for tests
+
+def checkIfVsauceInText(status):
+    content = status["text"]
+    return ("vsauce" in content) or ("@vsaucebot" in content) or ("Michael Stevens" in content)
