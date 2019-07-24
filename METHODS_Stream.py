@@ -147,4 +147,5 @@ def replyToStatus(status, tweetBuilder):
 
 def checkIfVsauceInText(status):
     content = status["text"]
-    return ("vsauce" in content) or ("@vsaucebot" in content) or ("Michael Stevens" in content)
+    content = content.upper()
+    return ("VSAUCE" in content) or ("@VSAUCEBOT" in content) or ("MICHAEL STEVENS" in content)

@@ -37,7 +37,7 @@ print("started log" + str(currentNo))
 #function to reply or like a tweet given to it
 while True:
     for status in iterator:
-        # try:
+        try:
             screen_name = status["user"]["screen_name"]
             content = status["text"]
             # cant be michelbots tweet and cant be favorited by me already or be another bot bc that got annoying
@@ -120,7 +120,7 @@ while True:
                 #api.send_direct_message(screen_name="CharlieJindra", text="brian got prankd")
                 #api.send_direct_message(1220165389, "ur a butt lol")
 
-        # except:
+        except:
             print("Didn't work somewhere along the way, went to except\n")
 
 # #login to twitter account as:
