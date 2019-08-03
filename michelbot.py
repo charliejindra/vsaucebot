@@ -8,6 +8,7 @@ import constants         # michelbot specific constants
 from METHODS_Grammar import spaceOut, getSpaceData
 import APIKeys
 
+
 #NOTE : as of now streaming stuff doesn't work with this file, although the skeleton is still here. It is functioning on streamMichel.py
 
 
@@ -87,7 +88,12 @@ while True: # infinite loop
     # put all the names together with a ' ' separating them
     trendsName = ' '.join(names)
 
-    trendNo = random.randint(0, 50) #random trend from 1st to 50th
+    hiOrLowTrend = random.randint(0,100)
+    if (hiOrLowTrend < 75):
+        trendNo = random.randint(0, 19) #75% of the time it'll be one of the top 20 trends
+    else:
+        trendNo = random.randint(20,50) # 25% of the time it'll be a bottom 30 trend
+    
     while ("Thoughts" in trends[trendNo]["name"]): # if its some dumbass shit like sunday thoughts then we're not using it
          trendNo = random.randint(1, 51) #random trend from 1st to 50th
     exeLog.write(str(trendNo) + "\n")
