@@ -16,11 +16,6 @@ csecret = APIKeys.csecret
 atoken = APIKeys.atoken
 asecret = APIKeys.asecret
 
-stream = TwitterStream(auth=OAuth(
-    atoken, asecret, ckey, csecret), timeout=None, block=True)
-
-iterator = stream.statuses.filter(follow="395477244", track="vsauce,@vsaucebot,@tweetsauce") #1863401324 me 395477244 tweetsauce
-
 #incrementing the log number
 runNo = open("streamLogs/runNo.txt", 'r') # open runNo in r to read number its on
 currentNo = int(runNo.read())
@@ -36,6 +31,12 @@ print("started log" + str(currentNo))
 
 #function to reply or like a tweet given to it
 while True:
+
+    stream = TwitterStream(auth=OAuth(
+    atoken, asecret, ckey, csecret), timeout=None, block=False)
+
+    iterator = stream.statuses.filter(follow="395477244", track="vsauce,@vsaucebot,@tweetsauce") #1863401324 me 395477244 tweetsauce
+
     for status in iterator:
         try:
             screen_name = status["user"]["screen_name"]
