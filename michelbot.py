@@ -87,7 +87,7 @@ while True: # infinite loop
     # put all the names together with a ' ' separating them
     trendsName = ' '.join(names)
 
-    trendNo = random.randint(1, 51) #random trend from 1st to 50th
+    trendNo = random.randint(0, 50) #random trend from 1st to 50th
     while ("Thoughts" in trends[trendNo]["name"]): # if its some dumbass shit like sunday thoughts then we're not using it
          trendNo = random.randint(1, 51) #random trend from 1st to 50th
     exeLog.write(str(trendNo) + "\n")
