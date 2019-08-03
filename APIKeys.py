@@ -1,4 +1,4 @@
-ckey = 'U6o8g2MxTxCjQXb5Ep3UrHDCc'
-csecret = 'rsv0VpttVujDpSv3gwwG61b2icfeLY8yI6xN4DZy2Z1GZJXuLU'
-atoken = '1114526834962632705-O2db2o6Ng63QCTvqyCqfL9KsH5Hh8y'
-asecret = 'yhZ3mJRDeSHuxefwp7hAy7HWqsGGwKNyMAJc55HKICE92'
+ckey = '2wVun8lNjVkZXKhgjCz0RsBhs'
+csecret = 'vVOQ61d9T6znOHshur5SpxyXm0giKgtXLdLzOsi97jAjOLCQE4'
+atoken = '1114526834962632705-ivvXdi5dFhtGxDn3NXjFLsNumbSSA3'
+asecret = 'FonWlnaWSeIQUxJplKWb7g8d91KcjDfSsCoo2Z8wBkqhe'

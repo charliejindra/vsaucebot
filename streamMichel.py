@@ -33,7 +33,7 @@ print("started log" + str(currentNo))
 while True:
 
     stream = TwitterStream(auth=OAuth(
-    atoken, asecret, ckey, csecret), timeout=None, block=False)
+    atoken, asecret, ckey, csecret), timeout=None)
 
     iterator = stream.statuses.filter(follow="395477244", track="vsauce,@vsaucebot,@tweetsauce") #1863401324 me 395477244 tweetsauce
 
