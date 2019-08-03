@@ -110,7 +110,7 @@ while True: # infinite loop
         fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
 
     while True:              # basically a do while loop
-        lineNo = random.randint(0, 98) # pick random line number from michelSayings
+        lineNo = random.randint(0, len(wasUsedList)-1) # pick random line number from michelSayings
         print("the number was " + str(lineNo))
         if not(wasUsedList[lineNo]):# as long as the line number has not been used, then break, otherwise loop again
             wasUsedList[lineNo] = True  # now set it to true
