@@ -44,8 +44,8 @@ while True:
 
     print('+//////////////////////////////+')
     print('initialized new TCP connection.')
-    print('time since last init: {}', prettifyTime(TCPDuration))
-    print('time since start of execution: {}', prettifyTime(time.time() - rootTime))
+    print('time since last init: {}'.format(prettifyTime(TCPDuration)))
+    print('time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
     print('+//////////////////////////////+')
 
     lastMessageTime = time.time()
@@ -132,8 +132,8 @@ while True:
 
                 #api.send_direct_message(screen_name="CharlieJindra", text="brian got prankd")
                 #api.send_direct_message(1220165389, "ur a butt lol")
-            print('! Time since last message: {}', prettifyTime(time.time - lastMessageTime))
-            print('! Time since start of execution: {}', prettifyTime(time.time() - rootTime))
+            print('! Time since last message: {}'.format(prettifyTime(time.time - lastMessageTime)))
+            print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
             lastMessageTime = time.time()
         except:
             print("Didn't work somewhere along the way, went to except\n")
