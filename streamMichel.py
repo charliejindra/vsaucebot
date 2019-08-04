@@ -50,7 +50,7 @@ while True:
 
     lastMessageTime = time.time()
     for status in iterator:
-        try:
+        #try:
             screen_name = status["user"]["screen_name"]
             content = status["text"]
             # cant be michelbots tweet and cant be favorited by me already or be another bot bc that got annoying
@@ -135,7 +135,7 @@ while True:
             print('! Time since last message: {}'.format(prettifyTime(time.time - lastMessageTime)))
             print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
             lastMessageTime = time.time()
-        except:
+        #except:
             print("Didn't work somewhere along the way, went to except\n")
 
     TCPTime = time.time()
