@@ -114,6 +114,10 @@ while True:
                         #msg = screen_name+" tweeted:\n\n"+content+"\n\nI would've tweeted:\n\n@tweetsauce "+tweetBuilder
 
                         send_email(subject, msg, exeLog)
+
+                        print('! Time since last message: {}'.format(prettifyTime(time.time() - lastMessageTime)))
+                        print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
+                        lastMessageTime = time.time()
                 else:                                             # favorite tweet that mentioned vsauce branch
                     if (content[0] == 'R' and content[1] == 'T'):  # if its a RT
                         print("3. Ended because retweeted status\n\n")
@@ -127,14 +131,16 @@ while True:
                         msg = screen_name+" tweeted:\n\n"+content
 
                         send_email(subject, msg, exeLog)
+                        
+                        print('! Time since last message: {}'.format(prettifyTime(time.time() - lastMessageTime)))
+                        print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
+                        lastMessageTime = time.time()
 
 
 
                 #api.send_direct_message(screen_name="CharlieJindra", text="brian got prankd")
                 #api.send_direct_message(1220165389, "ur a butt lol")
-            print('! Time since last message: {}'.format(prettifyTime(time.time() - lastMessageTime)))
-            print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
-            lastMessageTime = time.time()
+
         except:
             print("Didn't work somewhere along the way, went to except\n")
 
