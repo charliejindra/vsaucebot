@@ -38,3 +38,16 @@ def getSpaceData(pos, old):
     constants.inAcronym = True if (old[pos: pos + 2].isupper() and (not ' ' in old[pos:pos+2])) else False
     constants.atEndOfAcronym = True if (old[pos-1:pos+1].isupper() and (not ' ' in old[pos-1:pos+1]) and old[pos+1].islower()) else False
     constants.lastCapFromAcronym = True if (old[pos+1].isupper() and constants.inAcronym and old[pos+2:len(old)].islower()) else False
+
+def containsBlackListed(trend):
+    try:
+        with open('blackListedWords.txt', 'r', encoding="utf8") as michelSayings:
+            for line in michelSayings:
+                if (line in trend):
+                    return True
+    except:
+        with open('blackListedWords.txt', 'r') as michelSayings:
+            for line in michelSayings:
+                if (line in trend):
+                    return True
+    return False

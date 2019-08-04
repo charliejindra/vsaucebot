@@ -5,7 +5,7 @@ import datetime          # datetime class
 import random            # rng
 import pytz              # python timezones
 import constants         # michelbot specific constants
-from METHODS_Grammar import spaceOut, getSpaceData
+from METHODS_Grammar import spaceOut, getSpaceData, isBlackListedTrend
 import APIKeys
 
 
@@ -94,7 +94,7 @@ while True: # infinite loop
     else:
         trendNo = random.randint(20,50) # 25% of the time it'll be a bottom 30 trend
     
-    while ("Thoughts" in trends[trendNo]["name"]): # if its some dumbass shit like sunday thoughts then we're not using it
+    while (isBlackListedTrend(trends[trendNo]["name"])): # if its some dumbass shit like sunday thoughts then we're not using it
          trendNo = random.randint(1, 51) #random trend from 1st to 50th
     exeLog.write(str(trendNo) + "\n")
 
