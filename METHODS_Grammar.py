@@ -40,6 +40,7 @@ def getSpaceData(pos, old):
     constants.lastCapFromAcronym = True if (old[pos+1].isupper() and constants.inAcronym and old[pos+2:len(old)].islower()) else False
 
 def containsBlackListed(trend):
+    trend = trend.lower()
     try:
         with open('blackListedWords.txt', 'r', encoding="utf8") as michelSayings:
             for line in michelSayings:
