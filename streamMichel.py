@@ -132,7 +132,7 @@ while True:
 
                 #api.send_direct_message(screen_name="CharlieJindra", text="brian got prankd")
                 #api.send_direct_message(1220165389, "ur a butt lol")
-            print('! Time since last message: {}'.format(prettifyTime(time.time - lastMessageTime)))
+            print('! Time since last message: {}'.format(prettifyTime(time.time() - lastMessageTime)))
             print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
             lastMessageTime = time.time()
         #except:
