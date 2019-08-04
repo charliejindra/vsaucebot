@@ -10,6 +10,8 @@ import smtplib, ssl
 from METHODS_Stream import *
 import APIKeys
 
+rootTime = time.time() # time execution starts
+
 #twitter API credentials
 ckey = APIKeys.ckey
 csecret = APIKeys.csecret
@@ -29,6 +31,7 @@ runNo.close()
 exeLog = open("streamLogs/streamLog"+str(currentNo)+".txt", 'w+') # create new log for this edition yaye, w+ makes new file
 print("started log" + str(currentNo))
 
+TCPTime = time.time()
 #function to reply or like a tweet given to it
 while True:
 
@@ -37,6 +40,15 @@ while True:
 
     iterator = stream.statuses.filter(follow="395477244", track="vsauce,@vsaucebot,@tweetsauce") #1863401324 me 395477244 tweetsauce
 
+    TCPDuration = time.time() - TCPTime #get time since last tcp connection
+
+    print('+//////////////////////////////+')
+    print('initialized new TCP connection.')
+    print('time since last init: {}', prettifyTime(TCPDuration))
+    print('time since start of execution: {}', prettifyTime(time.time() - rootTime))
+    print('+//////////////////////////////+')
+
+    lastMessageTime = time.time()
     for status in iterator:
         try:
             screen_name = status["user"]["screen_name"]
@@ -120,9 +132,13 @@ while True:
 
                 #api.send_direct_message(screen_name="CharlieJindra", text="brian got prankd")
                 #api.send_direct_message(1220165389, "ur a butt lol")
-
+            print('! Time since last message: {}', prettifyTime(time.time - lastMessageTime))
+            print('! Time since start of execution: {}', prettifyTime(time.time() - rootTime))
+            lastMessageTime = time.time()
         except:
             print("Didn't work somewhere along the way, went to except\n")
+
+    TCPTime = time.time()
 
 # #login to twitter account as:
 # auth = tp.OAuthHandler(consumer_key, consumer_secret)
