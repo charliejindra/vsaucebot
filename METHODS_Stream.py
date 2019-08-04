@@ -32,12 +32,12 @@ def send_email(subject, msg, Log):
 
         server.login("michelvsace@gmail.com", michelPass)
 
-        print("got thru the email opening")
+        #print("got thru the email opening")
 
         try:
-            print('message abttta be stored')
+            #print('message abttta be stored')
             message = 'Subject: {}\n\n{}'.format(subject, msg)
-            print('message stored man')
+            #print('message stored man')
             server.sendmail("michelvsace@gmail.com", "charlessjindra@gmail.com", message)
         except:
             print('didnt work :(')
