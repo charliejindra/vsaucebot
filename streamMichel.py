@@ -152,9 +152,8 @@ while True:
 
         except:
             print("Didn't work somewhere along the way, went to except\n")
-        print('===========================')
-        print(michelChecker.user_timeline(screen_name="vsaucebot", count=1))
-        print('===========================')
+        mostRecentStatus =  michelChecker.user_timeline(screen_name="vsaucebot", count=1)
+        print json.dumps(mostRecentStatus, indent=4)
 
 # #login to twitter account as:
 # auth = tp.OAuthHandler(consumer_key, consumer_secret)
