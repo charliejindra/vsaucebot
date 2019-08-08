@@ -24,6 +24,8 @@ asecret = APIKeys.asecret
 auth = tp.OAuthHandler(ckey, csecret)
 auth.set_access_token(atoken, asecret)
 michelChecker = tp.API(auth)
+lastStatusText = ""
+lastStatusTime = time.time()
 print('michelChecker 1.0 booted')
 
 #incrementing the log number
@@ -153,8 +155,36 @@ while True:
 
         except:
             print("Didn't work somewhere along the way, went to except\n")
-        #mostRecentStatus =  
-        print(json.dumps(michelChecker.user_timeline(screen_name="vsaucebot", count=1), indent=4))
+        
+        # MICHELCHECKER -- CHECKS WHETHER MICHELBOT IS DOWN
+        mostRecentStatuses = michelChecker.user_timeline(screen_name="vsaucebot", count=20)
+        statusNum = 0
+        mostRecentStatus = mostRecentStatuses[statusNum]
+        try:
+            while mostRecentStatus["in_reply_to_status_id"] != None: #first gets to a status that's not a reply
+            statusNum = statusNum + 1
+            mostRecentStatus = mostRecentStatuses[statusNum]
+        except: # if every tweet was a reply... something's terribly wrong.
+            subject = "Michelbot is big down"
+            msg = "I looked through michel's last 20 tweets and nothing was a non-reply. Michelbot is big dead."
+
+            send_email(subject, msg, exeLog)
+        if mostRecentStatus["text"] == lastStatusText: #if the status is still the same as last time, check to see how long since that was posted
+            if time.time() - lastStatusTime > 10: #if the time since it was posted is more than 2 hours send an email
+                subject = "Michelbot might be down"
+                msg = "The last tweet michelbot tweeted:\n"+lastStatusText+"\n\nwas tweeted "+prettifyTime(time.time()-lastStatusTime)+" ago. This warning was sent because michelbot should be tweeting more frequently than this."
+
+                send_email(subject, msg, exeLog)
+
+        else: # if the status is different now update it and reset the waiting clock to 0 sec
+            lastStatusText = mostRecentStatus["text"]
+            lastStatusTime = time.time()
+
+        
+        
+        
+        
+        
 
 # #login to twitter account as:
 # auth = tp.OAuthHandler(consumer_key, consumer_secret)
