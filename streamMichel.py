@@ -177,7 +177,7 @@ while True:
                 send_email(subject, msg, exeLog)
 
         else: # if the status is different now update it and reset the waiting clock to 0 sec
-            lastStatusText = mostRecentStatus["text"]
+            lastStatusText = mostRecentStatus.text
             lastStatusTime = time.time()
 
         
