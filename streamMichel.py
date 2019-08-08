@@ -171,7 +171,7 @@ while True:
 
             send_email(subject, msg, exeLog)
         if mostRecentStatus.text == lastStatusText: #if the status is still the same as last time, check to see how long since that was posted
-            if time.time() - lastStatusTime > 10: #if the time since it was posted is more than 2 hours send an email
+            if time.time() - lastStatusTime > 7200: #if the time since it was posted is more than 2 hours send an email
                 print('michelbot status - he may be down. check up on him')
                 subject = "Michelbot might be down"
                 msg = "The last tweet michelbot tweeted was tweeted ago. This warning was sent because michelbot should be tweeting more frequently than this."
