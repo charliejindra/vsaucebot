@@ -165,18 +165,21 @@ while True:
                 statusNum = statusNum + 1
                 mostRecentStatus = mostRecentStatuses[statusNum]
         except: # if every tweet was a reply... something's terribly wrong.
+            print('michelbot status - last 20 tweets brought up nothing. michel is big down')
             subject = "Michelbot is big down"
             msg = "I looked through michel's last 20 tweets and nothing was a non-reply. Michelbot is big dead."
 
             send_email(subject, msg, exeLog)
         if mostRecentStatus.text == lastStatusText: #if the status is still the same as last time, check to see how long since that was posted
             if time.time() - lastStatusTime > 10: #if the time since it was posted is more than 2 hours send an email
+                print('michelbot status - he may be down. check up on him')
                 subject = "Michelbot might be down"
                 msg = "The last tweet michelbot tweeted:\n"+lastStatusText+"\n\nwas tweeted "+prettifyTime(time.time()-lastStatusTime)+" ago. This warning was sent because michelbot should be tweeting more frequently than this."
 
                 send_email(subject, msg, exeLog)
 
         else: # if the status is different now update it and reset the waiting clock to 0 sec
+            print('michelbot status - he tweeted!')
             lastStatusText = mostRecentStatus.text
             lastStatusTime = time.time()
 
