@@ -10,6 +10,7 @@ import pytz              # python timezones
 import smtplib, ssl
 from METHODS_Stream import *
 import APIKeys
+import json
 
 rootTime = time.time() # time execution starts
 
@@ -153,7 +154,7 @@ while True:
         except:
             print("Didn't work somewhere along the way, went to except\n")
         mostRecentStatus =  michelChecker.user_timeline(screen_name="vsaucebot", count=1)
-        print json.dumps(mostRecentStatus, indent=4)
+        print(json.dumps(mostRecentStatus, indent=4))
 
 # #login to twitter account as:
 # auth = tp.OAuthHandler(consumer_key, consumer_secret)
