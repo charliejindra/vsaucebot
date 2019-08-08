@@ -162,8 +162,8 @@ while True:
         mostRecentStatus = mostRecentStatuses[statusNum]
         try:
             while mostRecentStatus["in_reply_to_status_id"] != None: #first gets to a status that's not a reply
-            statusNum = statusNum + 1
-            mostRecentStatus = mostRecentStatuses[statusNum]
+                statusNum = statusNum + 1
+                mostRecentStatus = mostRecentStatuses[statusNum]
         except: # if every tweet was a reply... something's terribly wrong.
             subject = "Michelbot is big down"
             msg = "I looked through michel's last 20 tweets and nothing was a non-reply. Michelbot is big dead."
