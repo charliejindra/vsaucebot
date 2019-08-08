@@ -1,6 +1,7 @@
 #!/usr/bin/python3.3
 # last edit 7/23/2019
 # Charlie Jindra
+import tweepy as tp
 from twitter import *     # twitter api
 import time
 import datetime          # datetime class
@@ -17,6 +18,12 @@ ckey = APIKeys.ckey
 csecret = APIKeys.csecret
 atoken = APIKeys.atoken
 asecret = APIKeys.asecret
+
+#start michelChecker tweepy instance
+auth = tp.OAuthHandler(ckey, csecret)
+auth.set_access_token(atoken, asecret)
+michelChecker = tp.API(auth)
+print('michelChecker 1.0 booted')
 
 #incrementing the log number
 runNo = open("streamLogs/runNo.txt", 'r') # open runNo in r to read number its on
@@ -41,6 +48,8 @@ while True:
     iterator = stream.statuses.filter(follow="395477244", track="vsauce,@vsaucebot,@tweetsauce") #1863401324 me 395477244 tweetsauce
 
     TCPDuration = time.time() - TCPTime #get time since last tcp connection
+
+    TCPTime = time.time() # set tcpTime for next time
 
     print('+//////////////////////////////+')
     print('initialized new TCP connection.')
@@ -143,8 +152,9 @@ while True:
 
         except:
             print("Didn't work somewhere along the way, went to except\n")
-
-    TCPTime = time.time()
+        print('===========================')
+        print(michelChecker.user_timeline(screen_name="vsaucebot", count=1))
+        print('===========================')
 
 # #login to twitter account as:
 # auth = tp.OAuthHandler(consumer_key, consumer_secret)
