@@ -125,7 +125,7 @@ while True:
                         msg = screen_name+" tweeted:\n"+content+"\n\nI tweeted:\n@tweetsauce "+tweetBuilder+"\n\nLink to tweet: https://twitter.com/TESTACC79527338/status/" +status["id_str"]  #obv TESTACC79527338 for test, tweetsauce for actual
                         #msg = screen_name+" tweeted:\n\n"+content+"\n\nI would've tweeted:\n\n@tweetsauce "+tweetBuilder
 
-                        send_email(subject, msg, exeLog)
+                        #send_email(subject, msg, exeLog)
 
                         print('! Time since last message: {}'.format(prettifyTime(time.time() - lastMessageTime)))
                         print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
@@ -142,7 +142,7 @@ while True:
                         subject = "I liked a tweet!"
                         msg = screen_name+" tweeted:\n\n"+content
 
-                        send_email(subject, msg, exeLog)
+                        #send_email(subject, msg, exeLog)
                         
                         print('! Time since last message: {}'.format(prettifyTime(time.time() - lastMessageTime)))
                         print('! Time since start of execution: {}'.format(prettifyTime(time.time() - rootTime)))
@@ -172,7 +172,7 @@ while True:
             send_email(subject, msg, exeLog)
         timeSinceLastMichel = time.time() - lastStatusTime
         if mostRecentStatus.text == lastStatusText: #if the status is still the same as last time, check to see how long since that was posted
-            if timeSinceLastMichel > 10: #if the time since it was posted is more than 2 hours send an email
+            if timeSinceLastMichel > 7200: #if the time since it was posted is more than 2 hours send an email
                 print('michelbot status - he may be down. check up on him')
                 subject = "Michelbot might be down"
                 msg = "Michelbot's last tweet was tweeted {} ago. This warning was sent because michelbot should be tweeting more frequently than this.".format(prettifyTime(timeSinceLastMichel))

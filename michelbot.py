@@ -95,7 +95,8 @@ while True: # infinite loop
         trendNo = random.randint(20,50) # 25% of the time it'll be a bottom 30 trend
     
     while (containsBlackListed(trends[trendNo]["name"])): # if its some dumbass shit like sunday thoughts or something sensitive we're not using it
-         trendNo = random.randint(1, 51) #random trend from 1st to 50th
+        print("trend ranking: " + trendNo)
+        trendNo = random.randint(0, 49) #random trend from 1st to 50th
     exeLog.write(str(trendNo) + "\n")
 
     useTrend = trends[trendNo]["name"]     #trend to use
