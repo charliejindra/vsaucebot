@@ -44,11 +44,16 @@ def containsBlackListed(trend):
     try:
         with open('blackListedWords.txt', 'r', encoding="utf8") as michelSayings:
             for line in michelSayings:
+                line = line.strip('\n')
+                #print("{} in {}: {}".format(line, trend, line in trend))
                 if (line in trend):
+                    print("caught "+ line)
                     return True
     except:
         with open('blackListedWords.txt', 'r') as michelSayings:
             for line in michelSayings:
+                line = line.strip('\n')
                 if (line in trend):
+                    print(line)
                     return True
     return False
