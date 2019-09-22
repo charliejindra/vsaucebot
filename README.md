@@ -13,3 +13,12 @@ that both tweets and replies to Vsauce directly and his adoring fans occasionall
 * create test for which word michelStream will choose in reply
 * occasionally bitstring choice will go out of index, discover why
 * send email upon exception
+
+KEY TO REPLACEMENTS:
+@ is, are
+[ a, ""
+] has, have
+= does, do
+# plural term, just the term (for making things plural)
+^ doesn't, don't
+~ s, ""
