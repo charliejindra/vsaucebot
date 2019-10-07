@@ -184,6 +184,13 @@ while True:
             lastStatusText = mostRecentStatus.text
             lastStatusTime = time.time()
 
+    print("<TCP Connection Lost!>")
+    print("<Waiting 5 minutes to not go over API get limit.>")
+    countdown = 5
+    while countdown != 0:
+        print("<{} Minutes Remaining>".format(countdown))
+        time.sleep(60)
+
         
         
         
