@@ -93,8 +93,6 @@ while True: # infinite loop
         trendNo = random.randint(0, 19) #75% of the time it'll be one of the top 20 trends
     else:
         trendNo = random.randint(20,49) # 25% of the time it'll be a bottom 30 trend
-    
-    trendNo = 50
 
     print("trend Number: " + str(trendNo))
     while (containsBlackListed(trends[trendNo]["name"])): # if its some dumbass shit like sunday thoughts or something sensitive we're not using it
@@ -113,7 +111,7 @@ while True: # infinite loop
     isPlural = False
     if useTrend.endswith('s') :
         isPlural = True
-        
+
     try:
         fp = open("michelSayings.txt", 'r', encoding="utf8") # open michelSayings.txt in plaintext
     except:
