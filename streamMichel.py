@@ -157,7 +157,11 @@ while True:
             print("Didn't work somewhere along the way, went to except\n")
         
         # MICHELCHECKER -- CHECKS WHETHER MICHELBOT IS DOWN
-        mostRecentStatuses = michelChecker.user_timeline(screen_name="vsaucebot", count=20)
+        try:
+            mostRecentStatuses = michelChecker.user_timeline(screen_name="vsaucebot", count=20)
+        except:
+            print("max retries with michelchecker exceeded. will try again later.")
+            
         statusNum = 0
         mostRecentStatus = mostRecentStatuses[statusNum]
         try:
