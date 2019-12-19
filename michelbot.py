@@ -94,13 +94,21 @@ while True: # infinite loop
     else:
         trendNo = random.randint(20,49) # 25% of the time it'll be a bottom 30 trend
 
+    print('__Eval trend {}'.format(trends[trendNo]["name"]))
+
     print("trend Number: " + str(trendNo))
     while (containsBlackListed(trends[trendNo]["name"])): # if its some dumbass shit like sunday thoughts or something sensitive we're not using it
-        print("trend ranking: " + str(trendNo))
+        #print("trend ranking: " + str(trendNo))
+        print('__Contains blacklisted word.')
         trendNo = random.randint(0, 49) #random trend from 1st to 50th
+        print('__Eval trend {}'.format(trends[trendNo]["name"]))
     exeLog.write(str(trendNo) + "\n")
 
+    
+
     useTrend = trends[trendNo]["name"]     #trend to use
+    print('__Using trend {}'.format(useTrend))
+    
     wasHashtag = False
     if (useTrend[0] == '#'):
         wasHashtag = True
