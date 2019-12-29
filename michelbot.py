@@ -94,6 +94,8 @@ while True: # infinite loop
     else:
         trendNo = random.randint(20,49) # 25% of the time it'll be a bottom 30 trend
 
+    print("RAND PICKED #{}".format(trendNo))
+
     print('__Eval trend {}'.format(trends[trendNo]["name"]))
 
     print("trend Number: " + str(trendNo))
