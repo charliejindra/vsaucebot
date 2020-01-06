@@ -88,13 +88,14 @@ while True: # infinite loop
     # put all the names together with a ' ' separating them
     trendsName = ' '.join(names)
 
-    print("length of trends: " + str(len(trends)))
+    currentTrendLength = str(len(trends))
+    print("length of trends: " + currentTrendLength)
 
     hiOrLowTrend = random.randint(0,100)
     if (hiOrLowTrend < 75):
         trendNo = random.randint(0, 19) #75% of the time it'll be one of the top 20 trends
     else:
-        trendNo = random.randint(20,49) # 25% of the time it'll be a bottom 30 trend
+        trendNo = random.randint(20,currentTrendLength-1) # 25% of the time it'll be a bottom 30 trend
 
     print("RAND PICKED #{}".format(trendNo))
 
