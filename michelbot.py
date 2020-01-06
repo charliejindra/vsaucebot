@@ -88,7 +88,7 @@ while True: # infinite loop
     # put all the names together with a ' ' separating them
     trendsName = ' '.join(names)
 
-    print("length of trends: " + len(trends))
+    print("length of trends: " + str(len(trends)))
 
     hiOrLowTrend = random.randint(0,100)
     if (hiOrLowTrend < 75):
