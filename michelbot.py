@@ -95,7 +95,7 @@ while True: # infinite loop
     if (hiOrLowTrend < 75):
         trendNo = random.randint(0, 19) #75% of the time it'll be one of the top 20 trends
     else:
-        trendNo = random.randint(20,currentTrendLength-1) # 25% of the time it'll be a bottom 30 trend
+        trendNo = random.randint(20, int(currentTrendLength)-1) # 25% of the time it'll be a bottom 30 trend
 
     print("RAND PICKED #{}".format(trendNo))
 
