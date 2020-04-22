@@ -58,7 +58,7 @@ def makeStatus(term):
     except:
         fp = open("michelSayings.txt", 'r') # open michelSayings.txt in plaintext
 
-    lineNo = random.randint(0, 109) # pick random line number from michelSayings
+    lineNo = random.randint(0, 114) # pick random line number from michelSayings
     print("Line from michelSayings: " + str(lineNo))
 
     j = 0
